@@ -1,6 +1,7 @@
 """检查两个模型目录的测试日期、标签和预测概率是否一致。"""
 
 import argparse
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -8,6 +9,8 @@ import pandas as pd
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--reference", type=Path, required=True)
     parser.add_argument("--candidate", type=Path, required=True)

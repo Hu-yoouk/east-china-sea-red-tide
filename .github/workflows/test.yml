@@ -2,6 +2,8 @@ name: 复现检查
 on: [push, pull_request]
 permissions:
   contents: read
+env:
+  PYTHONUTF8: '1'
 jobs:
   forecast:
     strategy:
