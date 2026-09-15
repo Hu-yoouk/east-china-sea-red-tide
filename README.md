@@ -28,7 +28,7 @@ python3.12 -m venv .venv
 .venv/bin/python -m red_tide predict --input examples/observations_2019.csv --model-dir models/regional_v1 --output outputs/demo
 ```
 
-LightGBM 需要 OpenMP 运行库；macOS 缺库时安装 `libomp`，Linux 缺 `libgomp.so.1` 时安装对应系统包。本机 Windows 已验证，Linux 与 macOS 工作流尚未实际运行。
+LightGBM 需要 OpenMP 运行库；macOS 缺库时安装 `libomp`，Linux 缺 `libgomp.so.1` 时安装对应系统包。Windows、Linux 与 macOS 的 Python 3.12 安装、测试、示例推理及重训一致性均已通过 [GitHub Actions 验证](https://github.com/Hu-yoouk/east-china-sea-red-tide/actions/runs/34939570954)。
 
 打开 `outputs/demo/report.html` 查看结果。首次安装需要联网，推理和报告可离线使用。Windows 安装后也可双击 `演示.cmd`。
 
@@ -95,4 +95,4 @@ python scripts/export_monthly.py --database /数据路径/integrated_database.db
 | web/ | 原项目历史网站 |
 | legacy/ | 原报告及选定训练代码 |
 
-当前为本地开源交付候选。代码沿用原项目木兰宽松许可证第 2 版，第三方数据与依赖授权单独处理；见 [材料与来源](docs/材料与来源.md)。验收边界见 [复现验收](docs/复现验收.md)，演示步骤见 [评委演示流程](docs/评委演示流程.md)。
+完整技能包及 SHA256 校验文件见 [版本发布页](https://github.com/Hu-yoouk/east-china-sea-red-tide/releases/tag/v0.1.0)。代码沿用原项目木兰宽松许可证第 2 版，第三方数据与依赖授权单独处理；见 [材料与来源](docs/材料与来源.md)。验收边界见 [复现验收](docs/复现验收.md)，演示步骤见 [评委演示流程](docs/评委演示流程.md)。
