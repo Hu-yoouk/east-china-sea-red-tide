@@ -1,0 +1,34 @@
+============================================================
+Meta-Feature Collection Report
+============================================================
+
+Data: 240 months (2004-2023)
+  Train (2004-2017): 168 samples
+  Val   (2018-2019): 24 samples
+  Test  (2020-2023): 48 samples
+
+Meta Features:
+  p_lgb               : mean=0.4535  std=0.2460
+  p_tcn               : mean=0.5320  std=0.3034
+  p_cnn               : mean=0.4543  std=0.2677
+  p_max               : mean=0.5376  std=0.3045
+  p_min               : mean=0.4336  std=0.2513
+  p_std               : mean=0.0558  std=0.1303
+  entropy             : mean=0.7466  std=0.2007
+  confidence          : mean=0.2534  std=0.2007
+  shap_top1           : mean=0.0690  std=0.7436
+  shap_top2           : mean=-0.0896  std=0.4783
+  shap_top3           : mean=0.0050  std=0.2930
+  all_agree           : mean=0.8875  std=0.3166
+  majority_rt         : mean=0.4833  std=0.5008
+
+LightGBM OOF AUC: 0.7973
+
+Label Distribution:
+  Train: {0: 105, 1: 63}
+  Val:   {0: 18, 1: 6}
+  Test:  {0: 28, 1: 20}
+
+After SMOTE:
+  Train: {0: 105, 1: 105}
+============================================================

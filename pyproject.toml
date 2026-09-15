@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "east-china-sea-red-tide"
+version = "0.1.0"
+description = "东海研究区整体下一月赤潮风险预测与 Agent 技能"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy==2.2.6", "pandas==2.2.3", "scikit-learn==1.6.1", "lightgbm==4.6.0"]
+
+[project.scripts]
+red-tide = "red_tide.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

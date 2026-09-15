@@ -1,0 +1,27 @@
+{
+  "database_file": "integrated_database.db",
+  "database_sha256": "11d83ad01a0f03c4ae30723f6e9761ac7dc762bd7f4ed0a252d0e30fc122c0dd",
+  "chlorophyll_file": "chlorophyll_grid_data.csv",
+  "chlorophyll_sha256": "4370bca95fc3924793934717d212ef620883a60b65331734c5c6c99e9ee112c3",
+  "output_sha256": "c55d8048c733280086cc4c69c1ec46c5cf017d14dbe5c337b1af02b7f7c933b3",
+  "monthly_rows": 240,
+  "positive_months": 89,
+  "units": {
+    "sst": "℃",
+    "chlorophyll": "mg/m³",
+    "wind_speed": "m/s",
+    "pressure": "Pa",
+    "solar_radiation": "W/m²",
+    "precipitation": "mm/day",
+    "salinity": "实用盐度",
+    "nitrate": "μmol/L",
+    "phosphate": "μmol/L",
+    "silicate": "μmol/L"
+  },
+  "aggregation": "固定 195 个规则网格等权均值；叶绿素仅对非缺测原始观测取均值，另记覆盖率。",
+  "label": "项目旧数据库每月统一标签，仅代表项目整理的区域月度口径，未重核原始事件。",
+  "chlorophyll": "替换数据库中的机器学习插补值；新预测流程不会使用跨全年份拟合的叶绿素插补。",
+  "missing_chlorophyll_months": 0,
+  "environment_provenance_limit": "其余环境字段沿用现有处理结果；原产品单位转换与可用时间尚未全面重核。",
+  "redistribution": "派生数据来源分别追溯到原产品；不以代码许可证替代上游数据条款。"
+}

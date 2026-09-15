@@ -1,0 +1,81 @@
+{
+  "model_id": "regional-next-month-lightgbm-v1",
+  "scope": "120.5°E—123.5°E、29.0°N—32.5°N 研究区整体；不提供网格级预测",
+  "input_sha256": "812b0f23695d790cb44e15ee36ac6175ddb9e1e6fe8872ff842b38351248b27e",
+  "model_sha256": "bf95cc5f40bc43fd2e14293dcccf5bd629cf87c4dcc9170c3fd1ab57df535c18",
+  "input_first_month": "2019-01",
+  "forecast_origin": "2019-12",
+  "target_month": "2020-01",
+  "horizon_months": 1,
+  "probability": 0.17220336585862192,
+  "probability_note": "模型输出概率，未经独立校准，不是确定发生率",
+  "classification": "模型判为阴性",
+  "threshold": 0.5,
+  "threshold_note": "固定 0.5 分类阈值，非业务预警标准",
+  "seasonal_baseline": 0.13333333333333333,
+  "test_evaluation": {
+    "first_target": "2020-01",
+    "last_target": "2023-12",
+    "model": {
+      "n": 48,
+      "positive": 20,
+      "auc": 0.7571428571428572,
+      "average_precision": 0.6540008398682885,
+      "brier": 0.19827412022912705,
+      "log_loss": 0.5850564233477362,
+      "f1_at_0_5": 0.5555555555555556
+    },
+    "seasonal_baseline": {
+      "n": 48,
+      "positive": 20,
+      "auc": 0.7392857142857142,
+      "average_precision": 0.6240625,
+      "brier": 0.21333333333333337,
+      "log_loss": 0.618480807558791,
+      "f1_at_0_5": 0.5555555555555556
+    }
+  },
+  "warnings": [
+    "仅 240 个月历史数据，独立测试期 48 个月。",
+    "标签沿用项目整理的区域月度记录，未重新核验原始事件清单。",
+    "使用历史环境产品回溯评估，不等于实况业务预报；需核对数据发布延迟。",
+    "未验证网格级预测、其他海域或跨多月递推预测。",
+    "模型概率未经独立校准，不提供置信区间或官方预警等级。",
+    "6 项派生特征超出训练范围，结果需重点复核。"
+  ],
+  "out_of_range_features": [
+    "salinity__mean12",
+    "nitrate__mean3",
+    "nitrate__mean12",
+    "phosphate__mean12",
+    "silicate__mean3",
+    "silicate__mean12"
+  ],
+  "local_contributions": [
+    {
+      "feature": "solar_radiation__change3",
+      "log_odds_contribution": -0.3206729282176942
+    },
+    {
+      "feature": "target_month_cos",
+      "log_odds_contribution": -0.3150062668619964
+    },
+    {
+      "feature": "salinity__mean3",
+      "log_odds_contribution": -0.17054414030842463
+    },
+    {
+      "feature": "nitrate__mean3",
+      "log_odds_contribution": -0.1460388772659191
+    },
+    {
+      "feature": "pressure__last",
+      "log_odds_contribution": 0.094152102095132
+    }
+  ],
+  "explanation_note": "局部贡献为模型对数几率贡献，不代表因果关系或独立生态阈值。",
+  "suggestions": [
+    "结合近期现场监测核对叶绿素、水温及营养盐变化。",
+    "此结果用于研究区整体筛查，具体巡查点位需要空间观测支持。"
+  ]
+}

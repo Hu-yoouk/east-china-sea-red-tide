@@ -1,0 +1,73 @@
+======================================================================
+LightGBM v3 - Red Tide Prediction Report
+New Dataset: ERA5 + Nutrients + Salinity
+======================================================================
+
+Date: 2026-07-02 17:22:56
+Features: 18  |  Samples: 46800  |  Positive: 17355 (37.1%)
+Spatial Grids: 195  |  Time Span: 2004-2023
+Feature list: month_sin, month_cos, season, sst, chlorophyll, salinity, nitrate, phosphate, silicate, wind_speed, pressure, solar_radiation, precipitation, weather_index, sst_chl, nutrient_index, n_p_ratio, si_n_ratio
+
+----------------------------------------------------------------------
+Cross-Validation (5-Fold Spatial GroupKFold)
+----------------------------------------------------------------------
+  auc: 0.9641 +/- 0.0053
+  accuracy: 0.8981 +/- 0.0079
+  precision: 0.8602 +/- 0.0109
+  recall: 0.8661 +/- 0.0121
+  f1: 0.8631 +/- 0.0106
+
+----------------------------------------------------------------------
+Holdout Evaluation (1 spatial fold held out)
+----------------------------------------------------------------------
+  AUC:       0.9559
+  F1:        0.8464
+  Accuracy:  0.8851
+  Precision: 0.8398
+  Recall:    0.8531
+  Best Iter: 500
+  TN=5324  FP=565  FN=510  TP=2961
+
+----------------------------------------------------------------------
+Feature Importance (Gain, avg across 5 folds)
+----------------------------------------------------------------------
+  month_cos                    87721.0  ( 30.0%)
+  solar_radiation              46446.1  ( 15.9%)
+  pressure                     45669.2  ( 15.6%)
+  precipitation                25443.2  (  8.7%)
+  wind_speed                   22553.7  (  7.7%)
+  weather_index                17418.9  (  6.0%)
+  sst                          12947.7  (  4.4%)
+  n_p_ratio                     5612.2  (  1.9%)
+  month_sin                     5262.6  (  1.8%)
+  sst_chl                       4617.1  (  1.6%)
+  salinity                      3977.7  (  1.4%)
+  chlorophyll                   3767.9  (  1.3%)
+  phosphate                     2962.7  (  1.0%)
+  season                        2186.4  (  0.7%)
+  silicate                      1694.0  (  0.6%)
+  nitrate                       1487.4  (  0.5%)
+  nutrient_index                1484.5  (  0.5%)
+  si_n_ratio                    1450.7  (  0.5%)
+
+----------------------------------------------------------------------
+SHAP Importance (mean |SHAP|)
+----------------------------------------------------------------------
+  month_cos                     1.3072
+  solar_radiation               0.9356
+  pressure                      0.4581
+  precipitation                 0.3980
+  weather_index                 0.2054
+  wind_speed                    0.2026
+  sst                           0.1671
+  month_sin                     0.1277
+  n_p_ratio                     0.1216
+  salinity                      0.0591
+  sst_chl                       0.0492
+  chlorophyll                   0.0451
+  phosphate                     0.0384
+  season                        0.0355
+  si_n_ratio                    0.0346
+  nitrate                       0.0262
+  silicate                      0.0258
+  nutrient_index                0.0206

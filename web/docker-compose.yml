@@ -1,0 +1,8 @@
+services:
+  red-tide-history:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    ports:
+      - "8080:80"
+    restart: unless-stopped

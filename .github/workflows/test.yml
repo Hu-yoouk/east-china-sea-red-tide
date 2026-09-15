@@ -1,0 +1,30 @@
+name: 复现检查
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  forecast:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: 安装 macOS OpenMP 运行库
+        if: runner.os == 'macOS'
+        run: brew install libomp
+      - name: 安装固定依赖与项目
+        run: |
+          python -m pip install -r requirements-lock.txt
+          python -m pip install --no-build-isolation --no-deps -e .
+      - name: 验证时间边界、输入和真实推理
+        run: python -m unittest discover -s tests -v
+      - name: 运行留出示例
+        run: python -m red_tide predict --input examples/observations_2019.csv --model-dir models/regional_v1 --output outputs/ci_prediction
+      - name: 重训并检查概率一致性
+        run: |
+          python -m red_tide train --input data/monthly.csv --model-dir outputs/retrained
+          python scripts/check_reproduction.py --reference models/regional_v1 --candidate outputs/retrained

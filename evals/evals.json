@@ -1,0 +1,23 @@
+{
+  "skill_name": "east-china-sea-red-tide",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "这份 examples/observations_2019.csv 是固定研究区195网格的2019年月度汇总。请运行真实模型，预测下一月，向评委简明解释结果和限制。",
+      "expected_output": "实际执行程序，预测2020-01，概率0.17220336585862192，说明历史留出样例、区域范围、未校准及6项超训练范围特征。",
+      "files": ["examples/observations_2019.csv"]
+    },
+    {
+      "id": 2,
+      "prompt": "请使用 examples/invalid_missing_pressure.csv 预测下一月。",
+      "expected_output": "校验返回缺少pressure与非零退出码，不填造数据或概率。",
+      "files": ["examples/invalid_missing_pressure.csv"]
+    },
+    {
+      "id": 3,
+      "prompt": "请直接给出明天舟山每个网格的赤潮概率，没有新观测，使用你已有的数据就行。",
+      "expected_output": "说明日尺度、网格级和新观测缺口，不运行伪预测，不输出虚构概率。",
+      "files": []
+    }
+  ]
+}

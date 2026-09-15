@@ -1,0 +1,27 @@
+{
+  "total_records": 46800,
+  "per_page": 500,
+  "total_pages": 94,
+  "fields": [
+    "id",
+    "sample_id",
+    "year",
+    "month",
+    "longitude",
+    "latitude",
+    "sst",
+    "chlorophyll",
+    "wind_speed",
+    "pressure",
+    "solar_radiation",
+    "precipitation",
+    "red_tide_label",
+    "red_tide_area",
+    "red_tide_organism",
+    "red_tide_toxicity",
+    "salinity",
+    "nitrate",
+    "phosphate",
+    "silicate"
+  ]
+}

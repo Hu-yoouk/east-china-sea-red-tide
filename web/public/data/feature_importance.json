@@ -1,0 +1,62 @@
+[
+  {
+    "feature": "海温",
+    "importance": 0.4591,
+    "correlation": 0.2832,
+    "description": "海表温度影响藻类代谢速率和生长周期，20-28°C是多数赤潮藻种的最适温度区间"
+  },
+  {
+    "feature": "磷酸盐",
+    "importance": 0.2469,
+    "correlation": 0.1523,
+    "description": "磷酸盐是藻类生长的关键限制因子，与赤潮发生密切相关"
+  },
+  {
+    "feature": "叶绿素",
+    "importance": 0.2276,
+    "correlation": 0.1404,
+    "description": "叶绿素是浮游植物生物量的直接指标，浓度越高赤潮发生可能性越大"
+  },
+  {
+    "feature": "硝酸盐",
+    "importance": 0.0314,
+    "correlation": 0.0194,
+    "description": "硝酸盐是浮游植物生长必需的氮源，浓度过高易引发赤潮"
+  },
+  {
+    "feature": "盐度",
+    "importance": 0.022,
+    "correlation": 0.0136,
+    "description": "盐度影响藻类细胞渗透压调节，河口区盐度变化与赤潮风险相关"
+  },
+  {
+    "feature": "硅酸盐",
+    "importance": 0.013,
+    "correlation": 0.008,
+    "description": "硅酸盐是硅藻生长的必需元素，影响藻类种群结构"
+  },
+  {
+    "feature": "风速",
+    "importance": 0,
+    "correlation": 0,
+    "description": "风速影响水体混合和表层藻类聚集，低风速有利赤潮形成"
+  },
+  {
+    "feature": "气压",
+    "importance": 0,
+    "correlation": 0,
+    "description": "气压变化反映天气系统变化，影响海洋水体稳定性"
+  },
+  {
+    "feature": "太阳辐射",
+    "importance": 0,
+    "correlation": 0,
+    "description": "光照是藻类光合作用的必要条件，充足光照促进藻类生长"
+  },
+  {
+    "feature": "降水量",
+    "importance": 0,
+    "correlation": 0,
+    "description": "降水带来陆源营养盐输入，可能加剧近岸水体富营养化"
+  }
+]

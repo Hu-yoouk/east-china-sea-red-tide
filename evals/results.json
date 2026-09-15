@@ -1,0 +1,9 @@
+{
+  "method": "同一环境两个独立Agent，一个读取SKILL.md，一个不读取；实际执行命令并人工核对输出。",
+  "cases": [
+    {"id": 1, "with_skill_pass": true, "without_skill_pass": true, "evidence": "两次真实推理概率均为0.17220336585862192，目标2020-01。"},
+    {"id": 2, "with_skill_pass": true, "without_skill_pass": true, "evidence": "两次均缺少pressure，退出码2，没有生成概率。"},
+    {"id": 3, "with_skill_pass": true, "without_skill_pass": true, "evidence": "两次均说明超出日尺度和网格级能力，未伪造预测。"}
+  ],
+  "limitations": "每项仅一次，无统计显著性判断；不能宣称跨品牌Agent平台均已验证，或技能优于无技能基线。"
+}

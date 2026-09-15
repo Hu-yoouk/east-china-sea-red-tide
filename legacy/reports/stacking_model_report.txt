@@ -1,0 +1,43 @@
+============================================================
+Stacking Ensemble — Backbone+Corrector Arbitration Report
+============================================================
+
+Framework: LightGBM (Backbone) + TCN (Temporal Corrector)
+           + CNN (Spatial Corrector) → Stacking Arbiter
+
+Test Performance (2020-2023):
+  LightGBM (Backbone)      : AUC=0.6982, F1=0.6522
+  LGB+TCN                  : AUC=0.5554, F1=0.6129
+  LGB+CNN                  : AUC=0.5973, F1=0.5128
+
+Meta-Learner (Arbiter) Test Performance:
+  Stacking-LR : AUC=0.6857, F1=0.6667
+  Stacking-RF : AUC=0.6607, F1=0.5909
+  Stacking-LGB: AUC=0.6982, F1=0.5833
+  Stacking-MLP: AUC=0.6375, F1=0.6800
+
+Best Arbiter: Stacking-LGB
+  Test AUC: 0.6982
+  Test F1:  0.5833
+
+Risk Level Distribution:
+  Low (<0.3): 14
+  Medium (0.3-0.7): 18
+  High (>0.7): 16
+
+Meta Features:
+  [ 0] p_lgb               : LR coef=+0.1196
+  [ 1] delta_tcn           : LR coef=+0.0000
+  [ 2] delta_cnn           : LR coef=+0.0000
+  [ 3] p_lgb_tcn           : LR coef=+0.1196
+  [ 4] p_lgb_cnn           : LR coef=+0.1196
+  [ 5] p_max               : LR coef=+0.1196
+  [ 6] p_min               : LR coef=+0.1196
+  [ 7] p_std               : LR coef=+0.0000
+  [ 8] entropy             : LR coef=+0.1570
+  [ 9] confidence          : LR coef=-0.1570
+  [10] shap_top1           : LR coef=+0.1118
+  [11] shap_top2           : LR coef=+0.6939
+  [12] shap_top3           : LR coef=+0.5222
+  [13] all_agree           : LR coef=+0.0000
+  [14] majority_rt         : LR coef=+0.0885

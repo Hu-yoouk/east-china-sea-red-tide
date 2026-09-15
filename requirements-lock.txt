@@ -1,0 +1,15 @@
+# Python 3.12 的完整依赖版本；用于复现实验环境。
+cloudpickle==3.1.2
+joblib==1.6.0
+lightgbm==4.6.0
+numpy==2.2.6
+pandas==2.2.3
+python-dateutil==2.9.0.post0
+pytz==2026.3.post1
+scikit-learn==1.6.1
+scipy==1.18.1
+setuptools==75.8.0
+six==1.17.0
+threadpoolctl==3.6.0
+tzdata==2026.4
+wheel==0.45.1
