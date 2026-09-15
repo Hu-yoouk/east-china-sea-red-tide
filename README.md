@@ -1,98 +1,51 @@
 # 东海赤潮风险研判技能
 
-让 Agent 查询历史资料，并读取连续 12 个月的新环境数据，调用真实 LightGBM 模型预测研究区整体下一月风险。面向评委提供可执行、可追溯的演示。
+任何人都可以下载本公开仓库，查询已封装的历史数据与研究结论，并按技能规范获得有依据的解释和建议。具备文件访问与终端执行能力的 Agent，还可对符合要求的新环境数据运行真实 LightGBM 模型，预测固定研究区整体下一月风险。
 
-**整个仓库就是完整 Skill 包，入口为 [SKILL.md](SKILL.md)。** 本地训练、推理和独立 Agent 验收已完成。不要只复制技能说明文件。
+## 直接安装技能
 
-开源仓库：[Hu-yoouk/east-china-sea-red-tide](https://github.com/Hu-yoouk/east-china-sea-red-tide)。可下载完整仓库，或运行 `git clone https://github.com/Hu-yoouk/east-china-sea-red-tide.git`。
+完整技能位于 **[skill/east-china-sea-red-tide/](skill/east-china-sea-red-tide/)**。
 
-## 快速运行
-
-安装 **Python 3.12**，在仓库根目录打开终端，先执行 `python --version` 确认版本；有多个 Python 时使用 3.12 的实际解释器路径。
-
-Windows：
-
-```bat
-python -m venv .venv
-.venv\Scripts\python.exe -m pip install -r requirements-lock.txt
-.venv\Scripts\python.exe -m pip install --no-build-isolation --no-deps -e .
-.venv\Scripts\python.exe -m red_tide predict --input examples/observations_2019.csv --model-dir models/regional_v1 --output outputs/demo
+```text
+east-china-sea-red-tide/         仓库
+├── README.md                   本说明
+├── .github/workflows/          跨系统验证
+└── skill/
+    └── east-china-sea-red-tide/ ← 把这个文件夹整体移入 Agent 的技能目录
+        ├── SKILL.md            技能入口
+        ├── README.md           环境安装与使用说明
+        ├── src/                真实预测程序
+        ├── models/             已训练模型
+        ├── data/               月度历史数据
+        ├── references/         原研究结论
+        ├── examples/           输入与结果示例
+        ├── docs/               输入规范与模型边界
+        └── web/                原项目历史展示网站
 ```
 
-macOS / Linux：
+1. 下载本仓库，取出 `skill/east-china-sea-red-tide/`；也可从 [v0.1.1 版本发布页](https://github.com/Hu-yoouk/east-china-sea-red-tide/releases/tag/v0.1.1) 下载技能专用 ZIP，解压后直接得到 `east-china-sea-red-tide/`。
+2. 将整个 `east-china-sea-red-tide` 文件夹移入你的 Agent 支持的技能目录，保留文件夹名称。例如目标平台约定的目录为 `skills`，最终应为 `skills/east-china-sea-red-tide/SKILL.md`，不要额外套一层 `skill`。
+3. 在该技能目录中，按 [技能安装说明](skill/east-china-sea-red-tide/README.md) 创建 Python 3.12 虚拟环境并安装依赖。移动文件夹后再安装环境，避免搬运已有虚拟环境导致路径失效。
+4. 按目标平台要求重新加载技能。不同平台的目录和发现机制不同；不支持自动发现时，可直接让 Agent 读取该文件夹内的 `SKILL.md`。
 
-```bash
-python3.12 -m venv .venv
-.venv/bin/python -m pip install -r requirements-lock.txt
-.venv/bin/python -m pip install --no-build-isolation --no-deps -e .
-.venv/bin/python -m red_tide predict --input examples/observations_2019.csv --model-dir models/regional_v1 --output outputs/demo
-```
+**复制文件夹不等于依赖已安装。** 模型、数据和代码都随包提供；首次安装依赖需要联网，安装后推理可以离线运行。不必启动历史网站。
 
-LightGBM 需要 OpenMP 运行库；macOS 缺库时安装 `libomp`，Linux 缺 `libgomp.so.1` 时安装对应系统包。Windows、Linux 与 macOS 的 Python 3.12 安装、测试、示例推理及重训一致性均已通过 [GitHub Actions 验证](https://github.com/Hu-yoouk/east-china-sea-red-tide/actions/runs/34939570954)。
+## 可以怎样提问
 
-打开 `outputs/demo/report.html` 查看结果。首次安装需要联网，推理和报告可离线使用。Windows 安装后也可双击 `演示.cmd`。
+- “2021 年有多少个月出现赤潮标签？请给出依据。”
+- “解释项目中融合模型的研究结论和局限。”
+- “这份 CSV 覆盖固定研究区，请校验数据并预测下一月，生成报告。”
 
-样例是 **2019 年历史输入预测 2020 年 1 月**，概率约 **17.22%**，季节基准约 **13.33%**；不是当前实测预报。
+纯聊天平台可以阅读结论，但无法自行执行本地预测。技能不会自动收集最新海洋观测；真实预测需要用户提供连续至少 12 个月、符合字段和单位要求的区域环境数据。
 
-## 在不同 Agent 中调用
+## 能力与验证
 
-将完整仓库放到平台可读取的目录，注册为一个技能；不支持自动发现技能的平台，可以直接告诉 Agent：
+新预测程序是区域下一月 LightGBM 基线，历史资料覆盖 2004—2023 年；原论文融合模型结论另行保留。示例使用 2019 年输入预测 2020 年 1 月，输出概率约 17.22%，不是当前实测预报。概率未经独立校准，不支持网格级或日尺度预报，也不替代官方预警。
 
-> 请读取这个仓库的 SKILL.md，按其规范校验我的数据，再调用真实程序预测并返回结果文件。不要用语言模型猜测概率。
+- [技能入口](skill/east-china-sea-red-tide/SKILL.md)
+- [安装、运行和复现](skill/east-china-sea-red-tide/README.md)
+- [输入与模型说明](skill/east-china-sea-red-tide/docs/输入与模型说明.md)
+- [复现验收记录](skill/east-china-sea-red-tide/docs/复现验收.md)
+- [GitHub 自动测试](https://github.com/Hu-yoouk/east-china-sea-red-tide/actions)
 
-Agent 需要文件读取和终端执行能力。纯聊天平台可解释外部程序生成的 JSON，但不能自行执行本地预测。
-
-可以提问：“2021 年有多少个月出现赤潮标签？”“这份数据覆盖固定研究区，请预测下一月。”“为什么新模型指标与论文不同？”
-
-## 模型证据
-
-新模型是重新训练的下一月 LightGBM 基线，不是原论文融合模型。训练为 2005—2017 年的 156 个月，验证为 2018—2019 年的 24 个月，独立测试为 2020—2023 年的 48 个月。
-
-| 独立测试指标 | 新模型 | 历年同月基准 |
-|---|---:|---:|
-| AUC | 0.7571 | 0.7393 |
-| 平均精确率 | 0.6540 | 0.6241 |
-| Brier，越小越好 | 0.1983 | 0.2133 |
-| F1，固定阈值 0.5 | 0.5556 | 0.5556 |
-
-改进有限，未检验统计显著性。概率未经独立校准，不是官方预警等级。仅支持 120.5°E—123.5°E、29.0°N—32.5°N 研究区整体下一月预测。
-
-## 已发现的关键差异
-
-原始数据库同一月份所有网格标签相同，不能作为已验证的网格事件标签。空间重建数据库有 67 个正例，其中 2020—2023 年只有 1 个正例。原模型主要使用同期环境预测同期标签，不能把原评估指标直接迁移到下一月预测。
-
-详见 [模型与数据审计](docs/模型与数据审计.md) 和 [机器可读审计结果](docs/data_audit.json)。
-
-## 复现与查询
-
-在已安装环境中运行，或把 `python` 换成虚拟环境解释器：
-
-```bash
-python -m unittest discover -s tests -v
-python -m red_tide train --input data/monthly.csv --model-dir outputs/retrained_model
-python scripts/check_reproduction.py --reference models/regional_v1 --candidate outputs/retrained_model
-python -m red_tide history --input data/monthly.csv --year 2021 --output outputs/history_2021
-```
-
-从原始材料重新导出月度数据：
-
-```bash
-python scripts/export_monthly.py --database /数据路径/integrated_database.db --chlorophyll /数据路径/chlorophyll_grid_data.csv --output outputs/source_export/monthly.csv
-```
-
-日常推理与重训使用随包月度 CSV，不需要原始大型数据库。`scripts/audit_data.py` 可只读审计源数据库。
-
-## 目录与交付
-
-| 路径 | 用途 |
-|---|---|
-| SKILL.md | 技能入口 |
-| src/red_tide/ | 校验、训练、推理与报告 |
-| models/regional_v1/ | 权重、版本、独立测试 |
-| data/、examples/ | 月度数据、来源校验、输入与结果示例 |
-| docs/、references/ | 规范、审计、研究结论与演示说明 |
-| tests/、evals/ | 程序及独立 Agent 验收 |
-| web/ | 原项目历史网站 |
-| legacy/ | 原报告及选定训练代码 |
-
-完整技能包及 SHA256 校验文件见 [版本发布页](https://github.com/Hu-yoouk/east-china-sea-red-tide/releases/tag/v0.1.0)。代码沿用原项目木兰宽松许可证第 2 版，第三方数据与依赖授权单独处理；见 [材料与来源](docs/材料与来源.md)。验收边界见 [复现验收](docs/复现验收.md)，演示步骤见 [评委演示流程](docs/评委演示流程.md)。
+代码沿用木兰宽松许可证第 2 版。第三方数据与依赖的许可独立处理，见 [材料与来源](skill/east-china-sea-red-tide/docs/材料与来源.md)。

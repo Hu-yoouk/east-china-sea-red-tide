@@ -4,6 +4,9 @@ permissions:
   contents: read
 env:
   PYTHONUTF8: '1'
+defaults:
+  run:
+    working-directory: skill/east-china-sea-red-tide
 jobs:
   forecast:
     strategy:
