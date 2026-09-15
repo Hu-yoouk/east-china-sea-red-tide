@@ -28,7 +28,7 @@ python3.12 -m venv .venv
 .venv/bin/python -m red_tide predict --input examples/observations_2019.csv --model-dir models/regional_v1 --output outputs/demo
 ```
 
-LightGBM 需要 OpenMP 运行库；macOS 缺库时安装 `libomp`，Linux 缺 `libgomp.so.1` 时安装对应系统包。Windows、Linux 与 macOS 的 Python 3.12 安装、测试、示例推理及重训一致性均已通过 [GitHub Actions 验证](https://github.com/Hu-yoouk/east-china-sea-red-tide/actions/runs/34939570954)。
+LightGBM 需要 OpenMP 运行库；macOS 缺库时安装 `libomp`，Linux 缺 `libgomp.so.1` 时安装对应系统包。Windows、Linux 与 macOS 的 Python 3.12 安装、测试、示例推理及重训一致性均已通过 [GitHub Actions 验证](https://github.com/Hu-yoouk/east-china-sea-red-tide/actions/runs/34946340211)。
 
 打开 `outputs/demo/report.html` 查看结果。首次安装需要联网，推理和报告可离线使用。Windows 安装后也可双击 `演示.cmd`。
 
